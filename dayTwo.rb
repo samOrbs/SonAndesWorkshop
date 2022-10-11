@@ -11,8 +11,16 @@ live_loop :call_me_whatever do
     #   time_warp [0,randomRhythm] do # we can use time warp to shedule sound to be played in the future
     #    use_random_seed 6 # can be any number, forces randomness to be deterministic
     synth :bass_foundation,note:(scale :c3,:aeolian).pick(1) if(spread 1,8).tick(:c)
-    synth :kalimba,note:(scale :c5,:aeolian).pick(1), amp:4 if(spread 3,8).tick(:d)
-    sample :drum_cymbal_closed, amp:(knit 3,3,1,1).tick(:a) if(spread 5,4).tick(:b)
+   # synth :kalimba,note:(scale :c5,:aeolian).pick(1), amp:4 if(spread 3,8).tick(:d)
+   # sample :drum_cymbal_closed, amp:(knit 3,3,1,1).tick(:a) if(spread 5,4).tick(:b)
+   # sample :drum_bass_hard if p1 "x..."
+   # sample :drum_bass_hard if p2 "x..."
+   # sample :ambi_piano if p3 "x..."
+   # sample :bass_thick_c if p4 "x..."
+   # sample :ambi_lunar_land if p5"x..."
+   # sample :bass_woodsy_c if p6 "x..."
+   # sample :bass_voxy_hit_c if p7 "x..."
+
   end
   #  end
   sleep rest # lets tell the thread to sleep for one beat
@@ -41,13 +49,6 @@ end
 #E (11,24) = [x .. xxxxx. xxxx x.] is a necklace of aka pygmy rhythms from Central Africa [2]. It usually begins on the seventh lobe.
 #E (13,24) = [x. x xxxxx x xxxx x.] This is another necklace of aka Pygmy rhythms from Upper Sang [2]. It usually starts on the fourth beat.
 
-# sample :drum_bass_hard if p1 "xooo"
-# sample :drum_bass_hard if p2 "xooo"
-# sample :ambi_piano if p3 "xooo"
-# sample :bass_thick_c if p4 "ooxo"
-# sample :ambi_lunar_land if p5"ooooxooo"
-# sample :bass_woodsy_c if p6 "ooooxoooo"
-# sample :bass_voxy_hit_c if p7 "ooox"
 
 #-- a pattern definition...dont worry to much about this
 define :p1 do |p1|
