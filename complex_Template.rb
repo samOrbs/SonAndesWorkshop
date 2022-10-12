@@ -10,14 +10,14 @@ live_loop :call_me_crazy_but__you_got_this do
   # THE PART TO COMPOSE IN...
   rest = (ring 1).tick(:aname2) # try to turn me into a sequence... hint: (ring 1,2,3).tick(:A_Made_Up_Name), be careful not to make this too low, recommeded 0.5 and upwards :)
   
-  a = (ring 0).tick(:new1) # try to turn me into a sequence... hint: (ring 1,2,3).tick(:A_Made_Up_Name)
-  b = (ring 0).tick(:new2) # try to turn me into a sequence... hint: (ring 1,2,3).tick(:A_Made_Up_Name)
+  sliceA = (ring 0).tick(:new1) # try to turn me into a sequence... hint: (ring 1,2,3).tick(:A_Made_Up_Name)
+  pitchA = (ring 0).tick(:new2) # try to turn me into a sequence... hint: (ring 1,2,3).tick(:A_Made_Up_Name)
   scaleN1 = :harmonic_minor  # tip: check out the help button to find all the scales
   s1_Tweak = 0.1 # tip: best to go between -0.1 and 0.1
   
   
-  c = (ring 0).choose # try to turn me into a sequence... hint: (ring 1,2,3).tick(:A_Made_Up_Name)
-  d = (ring 0).tick(:new3) # try to turn me into a sequence... hint: (ring 1,2,3).tick(:A_Made_Up_Name)
+  sliceB = (ring 0).choose # try to turn me into a sequence... hint: (ring 1,2,3).tick(:A_Made_Up_Name)
+  pitchB = (ring 0).tick(:new3) # try to turn me into a sequence... hint: (ring 1,2,3).tick(:A_Made_Up_Name)
   scaleN2 = :harmonic_minor # tip: check out the help button to find all the scales
   s2_Tweak = -0.1 # tip: best to go between -0.1 and 0.1
   
@@ -53,13 +53,13 @@ live_loop :call_me_crazy_but__you_got_this do
     
     if rhythm == "yes"
       
-      sample soundFile1, slice:(line 0,127,steps:100)[a], rate:(scale :C4, scaleN1)[b]*s1_Tweak # try changin the numbers in the rate and slice ring
+      sample soundFile1, slice:(line 0,127,steps:100)[sliceA], rate:(scale :C4, scaleN1)[pitchA]*s1_Tweak # try changin the numbers in the rate and slice ring
       
     end
     
     if rhythm2 == "yes"
       
-      sample soundFile1, slice:(line 0,127,steps:100)[c], rate:(scale :C4, scaleN2)[d]*s2_Tweak # try changin the numbers in the rate and slice ring
+      sample soundFile1, slice:(line 0,127,steps:100)[sliceB], rate:(scale :C4, scaleN2)[pitchB]*s2_Tweak # try changin the numbers in the rate and slice ring
       
     end
     
