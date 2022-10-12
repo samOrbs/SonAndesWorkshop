@@ -1,31 +1,33 @@
 # coding: utf-8
-# day two, lets explore sequencing rhythms and randomness!
+link # enables link
 
-live_loop :call_me_whatever do
-  use_bpm :link # set to the link shared bpm
-  rest = 1 # sets our rest to be one beat, you can rest as many times as you want, try exploring using multiple rests
-  simpleRhythm = [0,rest*0.125,rest*0.25,rest*0.5]  # we use rest, and divide it by half, quater, and eigth
-  randomRhythm = (ring rest*0.125,rest*0.25,rest*0.5).choose # try adding this to the time_warp
-  emptyRhythm = [0]
-  time_warp simpleRhythm do
-    #   time_warp [0,randomRhythm] do # we can use time warp to shedule sound to be played in the future
-    #    use_random_seed 6 # can be any number, forces randomness to be deterministic
-    synth :bass_foundation,note:(scale :c3,:aeolian).pick(1) if(spread 1,8).tick(:c)
-   # synth :kalimba,note:(scale :c5,:aeolian).pick(1), amp:4 if(spread 3,8).tick(:d)
-   # sample :drum_cymbal_closed, amp:(knit 3,3,1,1).tick(:a) if(spread 5,4).tick(:b)
-   # sample :drum_bass_hard if p1 "x..."
-   # sample :drum_bass_hard if p2 "x..."
-   # sample :ambi_piano if p3 "x..."
-   # sample :bass_thick_c if p4 "x..."
-   # sample :ambi_lunar_land if p5"x..."
-   # sample :bass_woodsy_c if p6 "x..."
-   # sample :bass_voxy_hit_c if p7 "x..."
+soundFile1 = "DRAG_SOUND_HERE" # our first sound file
+soundFile2 = "DRAG_SOUND_HERE" # our second sound file
 
-  end
-  #  end
-  sleep rest # lets tell the thread to sleep for one beat
-end
-
+live_loop :call_me_crazy_but__you_got_this do
+  use_bpm :link
+  
+  # THE PART TO COMPOSE IN...
+  rest = (ring 1).tick(:aname2) # try to turn me into a sequence... hint: (ring 1,2,3).tick(:A_Made_Up_Name), be careful not to make this too low, recommeded 0.5 and upwards :)
+  
+  a = (ring 0).tick(:new1) # try to turn me into a sequence... hint: (ring 1,2,3).tick(:A_Made_Up_Name)
+  b = (ring 0).tick(:new2) # try to turn me into a sequence... hint: (ring 1,2,3).tick(:A_Made_Up_Name)
+  scaleN1 = :harmonic_minor  # tip: check out the help button to find all the scales
+  s1_Tweak = 0.1 # tip: best to go between -0.1 and 0.1
+  
+  
+  c = (ring 0).choose # try to turn me into a sequence... hint: (ring 1,2,3).tick(:A_Made_Up_Name)
+  d = (ring 0).tick(:new3) # try to turn me into a sequence... hint: (ring 1,2,3).tick(:A_Made_Up_Name)
+  scaleN2 = :harmonic_minor # tip: check out the help button to find all the scales
+  s2_Tweak = -0.1 # tip: best to go between -0.1 and 0.1
+  
+  myRhythm = [0,rest*0.5,rest*0.75] # try to make me more intresting :) ... hint: use [] brackets and inside always start with 0, then use rest* number below 1 to make sure everything is inside the loop
+  
+  ####################################################################################
+  # THE PART TO CHANGE THE RHYTHM IN...
+  rhythm = "yes" if(spread 1,1).tick(:rh1) # try values from the list of rhythms below
+  
+  rhythm2 = "yes" if p1 "x" # try and change based on the list of rhythms below
   
   # if(spread 2,5) = "x.x.." is a thirteenth century Persian rhythm called Khafif-e-ramal [34]. It is also the metric pattern of the second movement of Tchaikovsky’s Symphony No. 6 [17]. When it is started on the second onset ([x . . x .]) it is the metric pattern of Dave Brubeck’s Take Five as well as Mars from The Planets by Gustav Holst [17].
   # if(spread 3,4) = "x.xx" is the archetypal pattern of the Cumbia from Colombia [20], as well as a Calypso rhythm from Trinidad [13]. It is also a thirteenth century Persian rhythm called Khalif-e-saghil [34], as well as the trochoid choreic rhythmic pattern of ancient Greece [21].
@@ -44,6 +46,27 @@ end
   #Nova rhythm usually starts on the third onset as follows: "x..x..x...x..x.." [31]. However, there are other starting places as well, as for example [x . . x . . x . . x . . . x . .] [3].
   # if(spread 7,8) = "x.xxxxxx" is a typical rhythm played on the Bendir (frame drum), and used in the accom- paniment of songs of the Tuareg people of Libya [30].
   
+  
+  ##################################################################################
+  
+  time_warp myRhythm do
+    
+    if rhythm == "yes"
+      
+      sample soundFile1, slice:(line 0,127,steps:100)[a], rate:(scale :C4, scaleN1)[b]*s1_Tweak # try changin the numbers in the rate and slice ring
+      
+    end
+    
+    if rhythm2 == "yes"
+      
+      sample soundFile1, slice:(line 0,127,steps:100)[c], rate:(scale :C4, scaleN2)[d]*s2_Tweak # try changin the numbers in the rate and slice ring
+      
+    end
+    
+  end
+  sleep rest
+  
+end
 
 
 #-- a pattern definition...dont worry to much about this
@@ -68,5 +91,3 @@ end
 define :p7 do |p7|
   return p7.ring.tick(:p7) == "x"
 end
-
-
